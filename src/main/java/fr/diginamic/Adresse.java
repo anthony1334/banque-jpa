@@ -14,6 +14,13 @@ public class Adresse extends Client{
     public Adresse() {
     }
 
+    public Adresse(int numero, String rue, int codePostale, String ville) {
+        this.numero = numero;
+        this.rue = rue;
+        this.codePostale = codePostale;
+        this.ville = ville;
+    }
+
     public int getNumero() {
         return numero;
     }
