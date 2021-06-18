@@ -1,6 +1,7 @@
 package fr.diginamic;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -10,8 +11,9 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)//id auto-increment
     private int id;
+    private String nom;
     private String prenom;
-    private LocalDateTime dateNaissance;
+    private LocalDate dateNaissance;
 
 
     @ManyToOne//Jointure avec la table Banque
@@ -25,6 +27,21 @@ public class Client {
             private Set<Compte> comptes;
 
     public Client() {
+    }
+
+    public Client(String nom, String prenom, LocalDate dateNaissance, Banque banque) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dateNaissance = dateNaissance;
+        this.banque = banque;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public int getId() {
@@ -43,15 +60,13 @@ public class Client {
         this.prenom = prenom;
     }
 
-    public LocalDateTime getDateNaissance() {
+    public LocalDate getDateNaissance() {
         return dateNaissance;
     }
 
-    public void setDateNaissance(LocalDateTime dateNaissance) {
+    public void setDateNaissance(LocalDate dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
-
-
 
     public Banque getBanque() {
         return banque;

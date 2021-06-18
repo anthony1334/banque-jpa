@@ -24,6 +24,11 @@ public abstract class Compte {
     public Compte() {
     }
 
+    public Compte(String numero, double solde) {
+        this.numero = numero;
+        this.solde = solde;
+    }
+
     public int getId() {
         return id;
     }
