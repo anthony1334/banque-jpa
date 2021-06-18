@@ -71,5 +71,13 @@ public  class Compte {
     public void setClients(Set<Client> clients) {
         this.clients = clients;
     }
+    public void virementCredit(Virement virement,Compte compte){
+        if (virement.getMontant() > compte.getSolde()) {
+            System.out.println("operation impossible");
+        }
+        else{
+            compte.setSolde(virement.getMontant()+compte.getSolde());
+        }
+    }
 
 }

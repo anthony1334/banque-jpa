@@ -26,6 +26,18 @@ public class Test_Banque {
         em.persist(assuranceVie);
         Compte livretA = new LivretA(0.50);
         em.persist(livretA);
+        Virement virement1 = new Virement(LocalDateTime.of(2021,06,17,14,10,21),400.00,"virement",compte,"kiki");
+        if (virement1.getMontant() > compte.getSolde()) {
+            System.out.println(" operation impossible");
+
+        }
+        else{
+            compte.setSolde(virement1.getMontant() + compte.getSolde());
+            em.persist(virement1);
+        }
+
+
+
 
         Operation virement = new Virement("toto");
         em.persist(virement);
@@ -34,9 +46,29 @@ public class Test_Banque {
         Operation operation1 = new Operation(LocalDateTime.of(2021,06,18,14,37,25), 800.00, "Coucou",compte1);
         em.persist(operation1);
 
+
         compte1.setOperations(Set.of(operation));
         compte1.setSolde(compte1.getSolde() + operation.getMontant());
         compte1.setSolde(compte1.getSolde() - operation1.getMontant());
+
+        Virement virement2 = new Virement(LocalDateTime.of(2021,06,17,14,10,21),800.00,"virement",compte,"kiki");
+        em.persist(virement2);
+      /*  if (virement2.getMontant() > compte.getSolde()) {
+
+            System.out.println(" operation impossible");
+        }
+        else{
+            em.persist(virement2);
+            compte.setSolde( compte.getSolde()-virement2.getMontant() );
+        }*/
+
+        compte.virementCredit(virement2,compte);
+
+        Virement virement3 = new Virement(LocalDateTime.of(2021,06,17,14,55,11),1200.00,"virement",assuranceVie,"Hello");
+        em.persist(virement3);
+        assuranceVie.virementCredit(virement3,assuranceVie);
+
+
 
 
 
