@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Operation {
+public  class Operation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)//id auto-increment
     private int id;
@@ -20,6 +20,13 @@ public abstract class Operation {
     private Compte compte;
 
     public Operation() {
+    }
+
+    public Operation(LocalDateTime date, double montant, String motif, Compte compte) {
+        this.date = date;
+        this.montant = montant;
+        this.motif = motif;
+        this.compte = compte;
     }
 
     public int getId() {

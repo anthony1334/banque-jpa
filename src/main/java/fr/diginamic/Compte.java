@@ -1,10 +1,11 @@
 package fr.diginamic;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)// Heritage avec les tables Adresse et Banque
-public abstract class Compte {
+public  class Compte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)//id auto-increment
     private  int id;
@@ -14,12 +15,12 @@ public abstract class Compte {
 
     @ManyToMany// Jointure avec la table Client
     @JoinTable(name="COMPTE_CLIENT",
-            joinColumns = @JoinColumn(name = "ID_CLIENT",referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "ID_COMPTE",referencedColumnName = "ID"))
-            private Set<Client> clients;
+            joinColumns = @JoinColumn(name = "ID_COMPTE",referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "ID_CLIENT",referencedColumnName = "ID"))
+            private Set<Client> clients = new HashSet<>();
 
     @OneToMany(mappedBy = "compte")// Jointure avec la table Operation
-    private Set<Operation>operations;
+    private Set<Operation>operations ;
 
     public Compte() {
     }
@@ -27,6 +28,14 @@ public abstract class Compte {
     public Compte(String numero, double solde) {
         this.numero = numero;
         this.solde = solde;
+    }
+
+    public Set<Operation> getOperations() {
+        return operations;
+    }
+
+    public void setOperations(Set<Operation> operations) {
+        this.operations = operations;
     }
 
     public int getId() {
@@ -62,4 +71,5 @@ public abstract class Compte {
     public void setClients(Set<Client> clients) {
         this.clients = clients;
     }
+
 }

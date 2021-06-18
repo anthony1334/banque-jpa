@@ -11,6 +11,10 @@ public class Virement extends Operation {
     public Virement() {
     }
 
+    public Virement(String beneficiaire) {
+        this.beneficiaire = beneficiaire;
+    }
+
     public int getId() {
         return id;
     }

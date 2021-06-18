@@ -3,6 +3,7 @@ package fr.diginamic;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -24,7 +25,7 @@ public class Client {
     @JoinTable(name="COMPTE_CLIENT",
             joinColumns = @JoinColumn(name = "ID_CLIENT",referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "ID_COMPTE",referencedColumnName = "ID"))
-            private Set<Compte> comptes;
+            private Set<Compte> comptes = new HashSet<>();
 
     public Client() {
     }
@@ -34,6 +35,14 @@ public class Client {
         this.prenom = prenom;
         this.dateNaissance = dateNaissance;
         this.banque = banque;
+    }
+
+    public Client(String nom, String prenom, LocalDate dateNaissance, Banque banque, Set<Compte> comptes) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dateNaissance = dateNaissance;
+        this.banque = banque;
+        this.comptes = comptes;
     }
 
     public String getNom() {
@@ -83,4 +92,6 @@ public class Client {
     public void setComptes(Set<Compte> comptes) {
         this.comptes = comptes;
     }
+
+
 }
